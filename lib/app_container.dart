@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 import '../../../config/routes.dart';
+import 'classes/language_constant.dart';
+import 'controller/controller.dart';
 import 'controller/property_controller.dart';
 
 class AppContainer extends StatefulWidget {
@@ -56,23 +58,23 @@ class _AppContainerState extends State<AppContainer> {
     switch (route) {
       case Routes.home:
         iconData = Icons.home_outlined;
-        title = 'home';
+        title = translation(context).home_nav_item;
         break;
       case Routes.wishList:
-        iconData = Icons.location_on_outlined;
-        title = 'wish_list';
+        iconData = Icons.bookmark_outline;
+        title = translation(context).wishlist_nav_item;
         break;
       case Routes.blog:
-        iconData = Icons.bookmark_outline;
-        title = 'blog';
+        iconData = Icons.book_outlined;
+        title = translation(context).blog_nav_item;
         break;
       case Routes.account:
         iconData = Icons.account_circle_outlined;
-        title = 'account';
+        title = translation(context).account_nav_item;
         break;
       default:
         iconData = Icons.home_outlined;
-        title = 'home';
+        title = translation(context).home_nav_item;
         break;
     }
     if (route == _selected) {
@@ -110,7 +112,7 @@ class _AppContainerState extends State<AppContainer> {
     return Scaffold(
       body: IndexedStack(
         index: _exportIndexed(_selected),
-        children: <Widget>[Home(), WishList(), Blog(), Account()],
+        children: <Widget>[Home(), WishList(), Blogs(), Account()],
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(), //shape of notch
@@ -138,11 +140,11 @@ class _AppContainerState extends State<AppContainer> {
         ),
       ),
       floatingActionButton:
-          GetBuilder<PropertyController>(builder: (popularPropertiesData) {
+          GetBuilder<BlogController>(builder: (popularPropertiesData) {
         return FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
           onPressed: () async {
-            //popularPropertiesData.getAllProperties();
+            popularPropertiesData.getAllBlogs();
           },
           child: const Icon(
             Icons.add,

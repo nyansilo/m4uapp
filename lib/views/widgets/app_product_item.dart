@@ -278,7 +278,7 @@ class AppProductItem extends StatelessWidget {
                           children: <Widget>[
                             item!.type!.isNotEmpty
                                 ? Padding(
-                                    padding: const EdgeInsets.all(4),
+                                    padding: const EdgeInsets.all(5),
                                     child: AppTag(
                                       'For ${item!.type!}',
                                       type: TagType.status,

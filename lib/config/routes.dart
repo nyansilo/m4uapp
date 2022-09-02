@@ -19,6 +19,7 @@ class Routes {
   static const String propertyDetailRoute = "/propertyDetail";
   static const String propertyGalleryRoute = "/propertyGallery";
   static const String propertiesRoute = "/allProperties";
+  static const String blogsRoute = "/allBlogs";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -59,6 +60,13 @@ class Routes {
         return MaterialPageRoute(
           builder: (context) {
             return AllProperties();
+          },
+        );
+
+      case blogsRoute:
+        return MaterialPageRoute(
+          builder: (context) {
+            return Blogs();
           },
         );
 

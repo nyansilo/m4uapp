@@ -41,6 +41,15 @@ class PropertyRepository {
     return recentProperties;
   }
 
+  Future<List<PropertyModel>> loadFeaturedProperties() async {
+    final response = await Api.requestFeaturedProperties();
+    List temp = response.data['data'];
+    List<PropertyModel> featuredProperties =
+        temp.map((item) => PropertyModel.fromJson(item)).toList();
+
+    return featuredProperties;
+  }
+
   Future<List<PropertyModel>> loadPropertiesByCategoryId(int categoryId) async {
     final response =
         await Api.requestPropertiesByCategoryId(categoryId: categoryId);

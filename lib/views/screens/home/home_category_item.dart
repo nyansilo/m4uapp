@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../classes/language_constant.dart';
 import '../../../models/model.dart';
 import '../../widgets/widget.dart';
 
@@ -68,12 +69,38 @@ class HomeCategoryItem extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 4),
-            Text(
-              item!.title!,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.button!.copyWith(fontSize: 12),
-            ),
+            if (item!.title == 'Apartment') ...[
+              Text(
+                translation(context).cat_apartment,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    Theme.of(context).textTheme.button!.copyWith(fontSize: 12),
+              ),
+            ] else if (item!.title == 'Land') ...[
+              Text(
+                translation(context).cat_land,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    Theme.of(context).textTheme.button!.copyWith(fontSize: 12),
+              ),
+            ] else if (item!.title == 'Commercial') ...[
+              Text(
+                translation(context).cat_commercial,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    Theme.of(context).textTheme.button!.copyWith(fontSize: 12),
+              ),
+            ] else ...[
+              Text(
+                translation(context).cat_vehicle,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style:
+                    Theme.of(context).textTheme.button!.copyWith(fontSize: 12),
+              ),
+            ],
           ],
         ),
       ),

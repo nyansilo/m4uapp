@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../classes/language_constant.dart';
 import '../../../config/config.dart';
 
 class RecentHeader extends StatelessWidget {
@@ -21,7 +22,7 @@ class RecentHeader extends StatelessWidget {
           width: 5.0,
         ),
         Text(
-          'Recent_location',
+          translation(context).recent_header,
           style: Theme.of(context)
               .textTheme
               .headline6!
@@ -36,7 +37,7 @@ class RecentHeader extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
-                'view_all',
+                translation(context).view_all,
                 style: Theme.of(context).textTheme.bodyText1!.copyWith(
                       color: Theme.of(context).primaryColor,
                       fontWeight: FontWeight.w400,

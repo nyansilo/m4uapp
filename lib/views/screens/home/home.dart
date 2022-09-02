@@ -3,8 +3,12 @@ import 'package:circle_flags/circle_flags.dart';
 import 'package:get/get.dart';
 import 'dart:math' as math;
 
+import '../../../app.dart';
+import '../../../classes/language.dart';
+import '../../../classes/language_constant.dart';
 import '../../../config/routes.dart';
 import '../../../controller/controller.dart';
+import '../../../controller/language_controller.dart';
 import '../../../models/model.dart';
 import '../../../utils/utils.dart';
 import '../../widgets/widget.dart';
@@ -12,10 +16,93 @@ import '../../widgets/widget.dart';
 import 'home_category_item.dart';
 import 'home_popular_header.dart';
 import 'home_recent_header.dart';
+import 'home_swiper.dart';
 import 'search_field.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  LanguageController langController = Get.put(LanguageController());
+
+  //Action OnActionLang
+  void _onActionlanguage(BuildContext context) async {
+    var _listLanguage = Language.languageList();
+
+    final result = await showModalBottomSheet<String?>(
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        Widget bookingItem = Container();
+
+        return SafeArea(
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height * 0.25,
+            ),
+            child: Container(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(8),
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                      color: Theme.of(context).dividerColor,
+                    ),
+                  ),
+                  Container(
+                    child: Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (context, index) {
+                          Widget? trailing;
+                          final item = _listLanguage[index];
+                          /*if (item == _languageSelected) {
+                              trailing = Icon(
+                                Icons.check,
+                                color: Theme.of(context).primaryColor,
+                              );
+                            }
+                            */
+                          return AppListTitle(
+                            title: item.name,
+                            trailing: trailing,
+                            onPressed: () async {
+                              if (item.toString().isNotEmpty) {
+                                Locale locale =
+                                    await setLocale(item.languageCode);
+                                App.setLocale(context, locale);
+                              }
+                              langController.updateLanguageName(item.name);
+                              Navigator.pop(context);
+                            },
+                            border: index != 2,
+                            leading: CircleFlag(
+                              item.countryCode,
+                              size: 25,
+                            ),
+                          );
+                        },
+                        itemCount: 3,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
   SliverPersistentHeader makeHeader(Widget header) {
     return SliverPersistentHeader(
@@ -39,17 +126,41 @@ class Home extends StatelessWidget {
         child: AppBar(
             centerTitle: true,
             elevation: 0,
-            actions: <Widget>[
+            /*actions: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Container(),
-                  ],
+                padding: const EdgeInsets.all(8.0),
+                child: DropdownButton<Language>(
+                  underline: const SizedBox(),
+                  icon: const Icon(
+                    Icons.language,
+                    color: Colors.white,
+                  ),
+                  onChanged: (Language? language) async {
+                    if (language != null) {
+                      Locale locale = await setLocale(language.languageCode);
+                      App.setLocale(context, locale);
+                    }
+                  },
+                  items: Language.languageList()
+                      .map<DropdownMenuItem<Language>>(
+                        (e) => DropdownMenuItem<Language>(
+                          value: e,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              Text(
+                                e.flag,
+                                style: const TextStyle(fontSize: 30),
+                              ),
+                              Text(e.name)
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
-            ],
+            ],*/
             //leading: IconButton(icon: const Icon(Icons.list), onPressed: () {}),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -58,12 +169,12 @@ class Home extends StatelessWidget {
                 ConstrainedBox(
                   constraints:
                       const BoxConstraints(maxHeight: 35, maxWidth: 200),
-                  child: const Text(
-                    "Madalali4u",
-                    style: TextStyle(
+                  child: Text(
+                    translation(context).home_title,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16.0,
-                      fontFamily: 'Quite Magica',
+                      fontFamily: 'Merriweather',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -81,30 +192,32 @@ class Home extends StatelessWidget {
                 onTap: (() => _onActionlanguage(context)),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const <Widget>[
-                    Icon(
+                  children: <Widget>[
+                    const Icon(
                       Icons.language_outlined,
                       color: Colors.white,
                       size: 15.0,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 5.0,
                     ),
-                    Text(
-                      'English',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14.0,
-                        fontWeight: FontWeight.normal,
+                    Obx(
+                      () => Text(
+                        langController.languageName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down,
                       color: Colors.white,
                       size: 25.0,
                     ),
-                    Spacer(),
-                    Icon(
+                    const Spacer(),
+                    const Icon(
                       Icons.notifications,
                       color: Colors.white,
                       size: 25.0,
@@ -135,12 +248,12 @@ class Home extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate([
-              /*GetBuilder<PropertyController>(
-                builder: (popularPropertiesData) {
-                  var popular = popularPropertiesData.popularProperties;
-                  return HomeSwipe(height: 300.0, item: popular);
+              GetBuilder<PropertyController>(
+                builder: (featuredPropertiesData) {
+                  var featured = featuredPropertiesData.popularProperties;
+                  return HomeSwipe(height: 300.0, item: featured);
                 },
-              ),*/
+              ),
               _buildCategory(context),
               GetBuilder<PropertyController>(
                 builder: (popularPropertiesData) {
@@ -266,7 +379,7 @@ class Home extends StatelessWidget {
               const PopularHeader(),
               const SizedBox(height: 2),
               Text(
-                'let_find_interesting',
+                translation(context).let_find_interesting,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ],
@@ -336,7 +449,7 @@ class Home extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 2),
                 child: Text(
-                  'what_happen',
+                  translation(context).what_happen,
                   style: Theme.of(context).textTheme.bodyText1,
                 ),
               ),
@@ -350,81 +463,6 @@ class Home extends StatelessWidget {
       ],
     );
   }
-}
-
-///Action OnActionLang
-void _onActionlanguage(BuildContext context) async {
-  final result = await showModalBottomSheet<String?>(
-    context: context,
-    isScrollControlled: true,
-    builder: (BuildContext context) {
-      Widget bookingItem = Container();
-
-      return SafeArea(
-        child: Container(
-          constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height * 0.8,
-          ),
-          child: IntrinsicHeight(
-            child: Container(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: Column(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.all(8),
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(8),
-                      ),
-                      color: Theme.of(context).dividerColor,
-                    ),
-                  ),
-                  Column(
-                    children: [
-                      bookingItem,
-                      AppListTitle(
-                        title: 'English',
-                        leading: CircleFlag(
-                          CountryCode.usa,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          //Navigator.pop(context, "remove");
-                        },
-                      ),
-                      AppListTitle(
-                        title: 'Swahili',
-                        leading: CircleFlag(
-                          CountryCode.tanzania,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          //Navigator.pop(context, "remove");
-                        },
-                      ),
-                      AppListTitle(
-                        title: "Chinese",
-                        leading: CircleFlag(
-                          CountryCode.china,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          //Navigator.pop(context, "share");
-                        },
-                        border: false,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      );
-    },
-  );
 }
 
 void _onTapCategoryItem(CategoryDisplayModel item, BuildContext context) {

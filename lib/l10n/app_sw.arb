@@ -1,0 +1,51 @@
+{
+
+    "home_nav_item": "Mwanzo",
+    "blog_nav_item": "Blogi",
+    "favorite_nav_item": "Pendezo",
+    "account_nav_item": "Akaunti",
+    "home_title": "Madalali wetu",
+    "wishlist_nav_item": "Pendezo",
+    
+    "located_where": "WAPI ULIPO? >",
+    "search_properties": "Tafuta Bithaa",
+   
+    "cat_apartment": "Makazi",
+    "cat_land": "Ardhi",
+    "cat_commercial": "Ofisi",
+    "cat_vehicle": "Usafiri",
+ 
+    "popular_header": "Bidhaa Maarufu",
+    "let_find_interesting": "Hebu tujue ni mambo gani ya kuvutia zaidi",
+    "recent_header": "Bidhaa za hivi Karibuni",
+    "what_happen": "Ambacho kinaweza kutokea",
+    "view_all": "zote",
+    "english": "Kingereza",
+
+    "first_name_input": "Jina la Kwanza",
+    "first_name_hint": "Jina la kwanza",
+    "last_name_input": "Jina la Mwisho",
+    "last_name_hint": "Jina La Mwisho",
+    "email_input": "Barua pepe",
+    "email_hint": "Barua pepe",
+    "passsword_input": "Neno la siri",
+    "password_hint": "Neno la Siri",
+    "confirm_passsword_input": "Thibitisha neno la siri",
+    "confirm_password_hint": "Thibitisha neno la siri",
+    "signup_button": "Sajili",
+    "signin_button": "Ingia",
+    "dont_have_account": "Huna akaunti?",
+    "already_have_account": "Tayari unayo akaunti?",
+    "signin_label": "Sajili",
+    "signup_label": "Ingia",
+    "first_name_error": "Jina la kwanza linahitajika",
+    "last_name_error": "Jina la mwisho linahitajika",
+    "email_error": "Barua pepe batili",
+    "password_error": "Urefu wa nenosiri unapaswa kuwa zaidi ya herufi 6",
+    "confirm_password_error": "Neno la siri hailingani",
+    "invalid_credentials": "Uthibitishaji batili",
+    "form_error": "Taarifa sio sahihi, tafadhali jaza fomu kabla ya kuwasilisha",
+    "error_occured": "Itilafu imetokea!"
+  
+    
+}

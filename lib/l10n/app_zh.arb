@@ -1,0 +1,52 @@
+{
+
+    "home_title": "Madalali4u", 
+    "home_nav_item": "首页",
+    "wishlist_nav_item": "喜爱",
+    "blog_nav_item": "博客",
+    "account_nav_item": "帐户",
+    "favorite_nav_item": "喜爱",
+  
+  
+    "located_where": "WHERE ARE YOU LOCATED?>",
+    "search_properties": "搜索属性",
+  
+    "cat_apartment": "公寓",
+    "cat_land": "土地",
+    "cat_commercial": "商业的",
+    "cat_vehicle": "车辆",
+  
+    "popular_header": "热门属性",
+    "let_find_interesting": "让我们找出最有趣的事情",
+    "recent_header": "最近的房产",
+    "what_happen": "可能会发生什么",
+    "view_all": "查看全部",
+
+    "english": "英语",
+    "first_name_input": "First Name",
+    "first_name_hint": "Enter your firstname",
+    "last_name_input": "First Name",
+    "last_name_hint": "Enter your lastname",
+    "email_input": "Email",
+    "email_hint": "Enter your email",
+    "passsword_input": "Password",
+    "password_hint": "Enter your password",
+    "confirm_passsword_input": "Confirm Password",
+    "confirm_password_hint": "Enter confirmation password",
+    "signup_button": "Sign Up",
+    "signin_button": "Sign In",
+    "dont_have_account": "Don't have an account?",
+    "already_have_account": "Aready have an account?",
+    "signin_label": "Sign In",
+    "signup_label": "Sign Up",
+    "first_name_error": "First name is required",
+    "last_name_error": "Last name is required",
+    "email_error": "Invalid email",
+    "password_error": "Password length should be more than 6 chars",
+    "confirm_password_error": "Password don't match",
+    "invalid_credentials": "Invalid credentials",
+    "form_error": "Data is invalid, please fill the form before submitting!",
+    "error_occured": "An Error Occurred!"
+
+   
+}

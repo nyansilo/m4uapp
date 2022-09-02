@@ -6,6 +6,7 @@ import '../repositories/repository.dart';
 class PropertyController extends GetxController {
   @override
   void onInit() {
+    getFeaturedProperties();
     getPopularProperties();
     getRecentProperties();
     getAllProperties();
@@ -47,6 +48,15 @@ class PropertyController extends GetxController {
   //Get Recent Properties
   Future getRecentProperties() async {
     _recentProperties = await propertyRepository.loadRecentProperties();
+    update();
+  }
+
+  List<PropertyModel> _featuredProperties = [];
+  List<PropertyModel> get featuredProperties => [..._featuredProperties];
+
+  //Get Featured Properties
+  Future getFeaturedProperties() async {
+    _featuredProperties = await propertyRepository.loadFeaturedProperties();
     update();
   }
 

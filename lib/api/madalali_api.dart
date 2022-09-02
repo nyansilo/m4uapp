@@ -15,8 +15,10 @@ class Api {
   static const String allProperties = "/api/properties";
   static const String popularProperties = "/api/properties/popular";
   static const String recentProperties = "/api/properties/recent";
+  static const String featuredProperties = "/api/properties/featured";
   static const String propertiesByCategoryId = "/api/properties/category";
   static const String relatedpropertiesByPropertyId = "/api/properties/related";
+  static const String allBlogs = "/api/blogs";
   static const String authValidate = "/jwt-auth/v1/token/validate";
   static const String user = "/listar/v1/auth/user";
   static const String register = "/listar/v1/auth/register";
@@ -50,6 +52,12 @@ class Api {
     return result;
   }
 
+  ///Request Featued Properties
+  static Future<Response> requestFeaturedProperties() async {
+    final result = await httpManager.get(url: featuredProperties);
+    return result;
+  }
+
   ///Request Properties by CategoryId
   static Future<Response> requestPropertiesByCategoryId({categoryId}) async {
     final result =
@@ -62,6 +70,14 @@ class Api {
       {propertyId}) async {
     final result = await httpManager.get(
         url: "$relatedpropertiesByPropertyId/$propertyId");
+    return result;
+  }
+
+  ///Request All Blogs
+  static Future requestAllBlogs() async {
+    final result = await httpManager.get(url: allBlogs);
+    //final result = await M4uApi.getDio().get(popularProperties);
+    // developer.log(result);
     return result;
   }
 
