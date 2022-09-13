@@ -66,14 +66,21 @@ class PropertyController extends GetxController {
     await getPropertyByCategoryId(postID);
   }
 
-  List<PropertyModel> _categoryProperties = [];
-  List<PropertyModel> get categoryProperties => [..._categoryProperties];
+  //final RxList<PropertyModel> categoryProperties = <PropertyModel>[].obs;
+  final RxList<PropertyModel> _categoryProperties =
+      List<PropertyModel>.empty(growable: true).obs;
+
+  RxBool isProductLoading = false.obs;
+  //List<PropertyModel> _categoryProperties = [];
+  //List<PropertyModel> get categoryProperties => [..._categoryProperties];
+  RxList<PropertyModel> get categoryProperties => _categoryProperties;
   //Get Properties by CategoryId
   Future getPropertyByCategoryId(int catId) async {
-    _categoryProperties =
+    final categoryPropertiesList =
         await propertyRepository.loadPropertiesByCategoryId(catId);
+    _categoryProperties.assignAll(categoryPropertiesList);
     isloading = false;
-    update();
+    //update();
   }
 
   updatePropertyId(var postID) async {

@@ -1,11 +1,11 @@
 {
-
+    "home_title": "Madalali4u", 
     "home_nav_item": "Mwanzo",
-    "blog_nav_item": "Blogi",
+    "wishlist_nav_item": "Pendezo",
+    "blog_nav_item": "Blogu",
     "favorite_nav_item": "Pendezo",
     "account_nav_item": "Akaunti",
-    "home_title": "Madalali wetu",
-    "wishlist_nav_item": "Pendezo",
+    
     
     "located_where": "WAPI ULIPO? >",
     "search_properties": "Tafuta Bithaa",
@@ -45,7 +45,40 @@
     "confirm_password_error": "Neno la siri hailingani",
     "invalid_credentials": "Uthibitishaji batili",
     "form_error": "Taarifa sio sahihi, tafadhali jaza fomu kabla ya kuwasilisha",
-    "error_occured": "Itilafu imetokea!"
+    "error_occured": "Itilafu imetokea!",
+
+    "blog":"Blogu",
+
+    "account": "Akaunti",
+    "sign_out": "Ondoka",
+    "my_property": "Mali Yangu",
+    "check_out_your_properties": "Angalia mali zako",
+    "my_booking": "Uhifadhi Wangu",
+    "check_out_your_bookings": "Angalia uhifadhi wako",
+    "wish_list": "Pendezo",
+    "your_most_loved_items":"Vitu unavyopenda zaidi",
+    "help_center":"Kituo cha Usaidizi",
+    "help_regarding_your_recent_urchase": "Usaidizi kuhusu ununuzi hivi karibuni",
+    "edit_profile":"Badilisha Wasifu",
+    "change_password":"Badilisha neno la siri",
+    "about_us":"Kuhusu Sisi",
+    "contact_us":"Wasiliana Nasi",
+    "faq":"Faq",
+    "term_of_use":"Masharti ya Matumizi",
+    "privacy_policy":"Sera ya Faragha",
+    "app_version":"App Version",
+
+    "setting":"Mipangilio",
+    "language":"Lugha",
+    "notification":"Taarifa",
+    "theme":"Mandhari",
+    "dark_mode":"Hali ya Giza'",
+    "light_mode":"Hali ya Mwanga",
+    "font":"Fonti",
+
+    "change_language":"Badilisha Lugha",
+    "search":"Tafuta"
+   
   
     
 }

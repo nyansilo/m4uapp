@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 
 import '../models/model.dart';
 import '../repositories/repository.dart';
-import '../repositories/repository.dart';
 
 class BlogController extends GetxController {
   @override
@@ -23,7 +22,6 @@ class BlogController extends GetxController {
   Future getAllBlogs() async {
     _allBlogs = await blogRepository.loadAllBlogs();
     isloading = false;
-
     update();
   }
 }

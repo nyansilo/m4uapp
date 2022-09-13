@@ -1,10 +1,10 @@
-class BlogComment {
+class BlogCommentModel {
   final int id;
   final String commentBody, authorName, createdAt;
 
-  BlogComment(this.id, this.commentBody, this.authorName, this.createdAt);
+  BlogCommentModel(this.id, this.commentBody, this.authorName, this.createdAt);
 
-  BlogComment.fromJson(Map<String, dynamic> jsonMap)
+  BlogCommentModel.fromJson(Map<String, dynamic> jsonMap)
       : id = jsonMap['id'] ?? 0,
         commentBody = jsonMap['commentBody'] ?? '',
         authorName = jsonMap['authorName'] ?? '',

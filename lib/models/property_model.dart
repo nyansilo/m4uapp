@@ -8,7 +8,8 @@ class PropertyModel {
   String? description;
   String? address;
   List<PropertyImageModel>? images;
-  final List<PropertyModel>? latest;
+
+  ///final List<PropertyModel>? latest;
   String? createdAt;
   //int? viewNumber;
   String? type;
@@ -48,7 +49,8 @@ class PropertyModel {
     required this.region,
     required this.district,
     this.createdBy,
-    this.latest,
+
+    ///this.latest,
     this.createdAt,
     // this.viewNumber,
     this.isFavorite,
@@ -70,10 +72,6 @@ class PropertyModel {
   });
 
   factory PropertyModel.fromJson(Map<String, dynamic> json) {
-    final listLastest = List.from(json['latest'] ?? []).map((item) {
-      return PropertyModel.fromJson(item);
-    }).toList();
-
     return PropertyModel(
       id: json['id'] ?? 0,
       title: json['title'] ?? "",
@@ -105,7 +103,7 @@ class PropertyModel {
       createdBy: json['createdBy'] != null
           ? UserModel.fromJson(json['createdBy'])
           : null,
-      latest: listLastest,
+      //latest: listLastest,
 
       area: json['area'] ?? 0,
       room: json['room'] ?? 0,

@@ -7,9 +7,10 @@ class BlogModel {
   final String? description;
   final String? image;
   final String? createdAt;
-  final String? commentNumber;
+  final int? commentNumber;
   final BlogCategoryModel? category;
   final BlogAuthorModel? createdBy;
+  List<BlogCommentModel>? comments;
 
   BlogModel(
       {this.id,
@@ -20,22 +21,29 @@ class BlogModel {
       this.createdBy,
       this.createdAt,
       this.commentNumber,
+      this.comments,
       this.likes});
 
-  BlogModel.fromJson(Map<String, dynamic> jsonMap)
-      : id = jsonMap['id'] ?? 0,
-        title = jsonMap['title'] ?? "",
-        description = jsonMap['description'] ?? "",
-        image = jsonMap['image'] ?? "",
-        commentNumber = jsonMap['commentNumber'].toString() ?? "",
-        likes = jsonMap['likes'] ?? 0,
-        category = jsonMap['category'] != null
-            ? BlogCategoryModel.fromJson(jsonMap['category'])
-            : null,
-        createdBy = jsonMap['createdBy'] != null
-            ? BlogAuthorModel.fromJson(jsonMap['createdBy'])
-            : null,
-        createdAt = jsonMap['createdAt'] ?? "";
+  factory BlogModel.fromJson(Map<String, dynamic> jsonMap) {
+    return BlogModel(
+      id: jsonMap['id'] ?? 0,
+      comments: (jsonMap['comments'] as List)
+          .map((e) => BlogCommentModel.fromJson(e))
+          .toList(),
+      title: jsonMap['title'] ?? "",
+      description: jsonMap['description'] ?? "",
+      image: jsonMap['image'] ?? "",
+      commentNumber: jsonMap['commentNumber'] ?? 0,
+      likes: jsonMap['likes'] ?? 0,
+      category: jsonMap['category'] != null
+          ? BlogCategoryModel.fromJson(jsonMap['category'])
+          : null,
+      createdBy: jsonMap['createdBy'] != null
+          ? BlogAuthorModel.fromJson(jsonMap['createdBy'])
+          : null,
+      createdAt: jsonMap['createdAt'] ?? "",
+    );
+  }
 
   //Entities should contain all the logic that it controls
   //incrementLikes() {

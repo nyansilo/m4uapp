@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
 import '../../../classes/language_constant.dart';
+import '../../../controller/controller.dart';
 import '../../../models/model.dart';
 import '../../widgets/widget.dart';
 
@@ -17,6 +19,7 @@ class HomeCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.find<PropertyController>();
     if (item == null) {
       return AppPlaceholder(
         child: SizedBox(
@@ -49,7 +52,10 @@ class HomeCategoryItem extends StatelessWidget {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.21,
       child: GestureDetector(
-        onTap: () => onPressed!(item!),
+        onTap: () {
+          onPressed!(item!);
+          controller.updateCategoryId(item!.categoryId);
+        },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,

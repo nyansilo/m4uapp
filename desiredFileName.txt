@@ -1,0 +1,19 @@
+{
+  "fa": [
+    "blog"
+  ],
+
+  "hi": [
+    "dark_mode"
+  ],
+
+  "sw": [
+    "home",
+    "message"
+  ],
+
+  "zh": [
+    "home",
+    "message"
+  ]
+}

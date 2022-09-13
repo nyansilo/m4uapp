@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:m4uapp/utils/image_string.dart';
 
-import '../../../config/branding_color.dart';
+import '../../../utils/branding_color.dart';
 import '../../../config/config.dart';
 import '../../../controller/controller.dart';
 import '../../../models/model.dart';
+import '../../../utils/utils.dart';
 
 class Blogs extends StatefulWidget {
   @override
@@ -21,18 +22,25 @@ class _BlogsState extends State<Blogs> {
 
   @override
   Widget build(BuildContext context) {
-    final Color bgColor = Color(0xffF3F3F3);
-
     return Scaffold(
-        backgroundColor: bgColor,
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
-          //backgroundColor: Colors.transparent,
-          elevation: 0,
           automaticallyImplyLeading: false,
-          title: const Text(
-            "Blog",
-            style: TextStyle(color: Colors.white),
+          iconTheme: IconThemeData(
+            color: Theme.of(context).primaryColor,
           ),
+          /*leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Theme.of(context).primaryColor,
+          ),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        */
+          //backgroundColor: AppColor.whiteColor,
+          centerTitle: true,
+          elevation: 0,
+          title: Text('Blog', style: Theme.of(context).textTheme.headline6),
         ),
         body: BlogPostList());
   }
@@ -59,11 +67,8 @@ class BlogPostList extends StatelessWidget {
                 blog: blogs[index],
                 onTap: () {
                   //Navigate to poste detail
-                  //Navigator.pushNamed(context, blogDetailRoute,
-                  //arguments: blogs[index]);
-                  //If you use pushReplacementNamed, PostsService will be unregistered and
-                  //You can not get it using Injector.get or ReactiveModel.get.
-                  //If you want keep PostsService you have to reinject it. See not bellow.
+                  Navigator.pushNamed(context, Routes.blogDetailRoute,
+                      arguments: blogs[index]);
                 },
               ),
 
@@ -120,7 +125,7 @@ class PostListItem extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           blog!.createdAt!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14.0,
                           ),
@@ -128,7 +133,7 @@ class PostListItem extends StatelessWidget {
                         Spacer(),
                         Text(
                           blog!.category!.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.grey,
                             fontSize: 14.0,
                           ),
@@ -160,10 +165,10 @@ class PostListItem extends StatelessWidget {
                           fontSize: 12.0,
                         ),
                       ),
-                      SizedBox(width: 5.0),
+                      const SizedBox(width: 5.0),
                       Text(
                         "${blog!.createdBy!.firstName} ${blog!.createdBy!.lastName}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 12.0,
                           fontWeight: FontWeight.w700,

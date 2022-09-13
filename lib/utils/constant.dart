@@ -44,3 +44,6 @@ const kTrailingStyle = TextStyle(
   decoration: TextDecoration.underline,
   color: Colors.black45,
 );
+
+const kLeadingIconSize = 20.0;
+const kTrallingIconSize = 25.0;

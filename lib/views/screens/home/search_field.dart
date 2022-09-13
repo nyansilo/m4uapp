@@ -5,33 +5,30 @@ import '../../../classes/language_constant.dart';
 class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      elevation: 5.0,
-      borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-      child: GestureDetector(
-        onTap: () {
-          //showSearch(context: context, delegate: SearchProperties());
-        },
-        child: const AbsorbPointer(
-          child: TextField(
-            style: TextStyle(color: Colors.black, fontSize: 14.0),
-            cursorColor: Colors.deepOrange,
-            decoration: InputDecoration(
-              contentPadding:
-                  EdgeInsets.symmetric(horizontal: 32.0, vertical: 14.0),
-              suffixIcon: Material(
-                  elevation: 2.0,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  child: Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  )),
-              border: InputBorder.none,
-              hintText: 'search_properties',
+    return Padding(
+        padding: EdgeInsets.only(top: 0, left: 16, right: 16, bottom: 15),
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: translation(context).search_properties,
+            hintStyle: TextStyle(color: Colors.grey.shade600),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.grey.shade600,
+              size: 20,
+            ),
+            filled: true,
+            fillColor: Colors.grey.shade100,
+            labelStyle: const TextStyle(fontSize: 12),
+            contentPadding: const EdgeInsets.all(10),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade100),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade100),
+              borderRadius: BorderRadius.circular(25),
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

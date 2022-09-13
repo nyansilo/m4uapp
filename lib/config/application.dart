@@ -5,8 +5,8 @@ import '../models/model.dart';
 class Application {
   static bool debug = false;
   //static String googleAPI = 'AIzaSyAGHlk0PoZ-BdSwUJh_HGSHXWKlARE4Pt8';
-  //static String domain = 'https://listarapp.com';
-  static String domain = 'http://localhost:8000';
+  static String domain = 'https://madalali4u.herokuapp.com';
+  //static String domain = 'http://localhost:8000';
 
   static String defaultImage = '${domain}/img/default-placeholder.png';
 

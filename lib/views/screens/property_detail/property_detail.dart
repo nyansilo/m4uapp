@@ -1054,6 +1054,7 @@ class _PropertyDetailState extends State<PropertyDetail> {
     //PropertyModel? property  = Get.find<PropertyController>().popularProperties[widget.id];
 
     return Scaffold(
+      backgroundColor: AppColor.scaffoldBGColor,
       body: _buildContent(widget.property),
     );
   }

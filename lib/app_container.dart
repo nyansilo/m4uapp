@@ -18,18 +18,18 @@ class AppContainer extends StatefulWidget {
 }
 
 class _AppContainerState extends State<AppContainer> {
-  String _selected = Routes.home;
+  String _selected = Routes.homeRoute;
 
   ///Export index stack
   int _exportIndexed(String route) {
     switch (route) {
-      case Routes.home:
+      case Routes.homeRoute:
         return 0;
-      case Routes.wishList:
+      case Routes.wishListRoute:
         return 1;
-      case Routes.blog:
+      case Routes.blogRoute:
         return 2;
-      case Routes.account:
+      case Routes.accountRoute:
         return 3;
       default:
         return 0;
@@ -56,19 +56,19 @@ class _AppContainerState extends State<AppContainer> {
     String title = 'home';
     IconData iconData = Icons.help_outline;
     switch (route) {
-      case Routes.home:
+      case Routes.homeRoute:
         iconData = Icons.home_outlined;
         title = translation(context).home_nav_item;
         break;
-      case Routes.wishList:
+      case Routes.wishListRoute:
         iconData = Icons.bookmark_outline;
         title = translation(context).wishlist_nav_item;
         break;
-      case Routes.blog:
-        iconData = Icons.book_outlined;
+      case Routes.blogRoute:
+        iconData = Icons.wysiwyg_outlined;
         title = translation(context).blog_nav_item;
         break;
-      case Routes.account:
+      case Routes.accountRoute:
         iconData = Icons.account_circle_outlined;
         title = translation(context).account_nav_item;
         break;
@@ -123,28 +123,33 @@ class _AppContainerState extends State<AppContainer> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildMenuItem(
-                route: Routes.home,
+                route: Routes.homeRoute,
               ),
               _buildMenuItem(
-                route: Routes.wishList,
+                route: Routes.wishListRoute,
               ),
               const SizedBox(width: 56),
               _buildMenuItem(
-                route: Routes.blog,
+                route: Routes.blogRoute,
               ),
               _buildMenuItem(
-                route: Routes.account,
+                route: Routes.accountRoute,
               ),
             ],
           ),
         ),
       ),
       floatingActionButton:
-          GetBuilder<BlogController>(builder: (popularPropertiesData) {
+          GetBuilder<AddPropertyController>(builder: (popularPropertiesData) {
         return FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
           onPressed: () async {
-            popularPropertiesData.getAllBlogs();
+            popularPropertiesData.getAllRegions();
+            //popularPropertiesData.getAllBlogs();
+            Navigator.pushNamed(
+              context,
+              Routes.addPropertyRoute,
+            );
           },
           child: const Icon(
             Icons.add,

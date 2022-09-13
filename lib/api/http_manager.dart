@@ -15,8 +15,9 @@ List<Interceptor> _interceptors = [
 
 class HTTPManager {
   BaseOptions baseOptions = BaseOptions(
-    //baseUrl: '${Application.domain}',
-    baseUrl: 'http://localhost:8000',
+    baseUrl: Application.domain,
+    //baseUrl: 'http://localhost:8000',
+    //baseUrl: 'https://madalali4u.herokuapp.com',
 
     connectTimeout: 30000,
     receiveTimeout: 30000,

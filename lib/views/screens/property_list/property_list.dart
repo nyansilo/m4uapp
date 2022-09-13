@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:m4uapp/views/screens/category/category.dart';
 
 import '../../../controller/controller.dart';
 import '../../../models/model.dart';
@@ -18,10 +19,22 @@ class PropertyList extends StatefulWidget {
 }
 
 class _PropertyListState extends State<PropertyList> {
+  // @override
+  //void initState() {
+  /// super.initState();
+  //var controller = Get.find<PropertyController>();
+  //controller.updateCategoryId(widget.category!.categoryId);
+  //controller.categoryProperties;
+  //}
+
   String layout = 'grid';
   @override
   Widget build(BuildContext context) {
     final Color bgColor = Color(0xffF3F3F3);
+
+    var controller = Get.find<PropertyController>();
+    controller.updateCategoryId(widget.category!.categoryId);
+    var properties = controller.categoryProperties;
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -89,42 +102,32 @@ class _PropertyListState extends State<PropertyList> {
             ),
             Offstage(
               offstage: this.layout != 'list',
-              child: GetBuilder<PropertyController>(
-                builder: (controller) {
-                  //controller.catId.value = widget.category!.categoryId!;
 
-                  controller.updateCategoryId(widget.category!.categoryId!);
+              //controller.catId.value = widget.category!.categoryId!;
 
-                  var properties = controller.categoryProperties;
+              //controller.updateCategoryId(widget.category!.categoryId!);
 
-                  if (controller.isloading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return PropertiesListWidget(properties: properties);
-                  }
-                },
-              ),
+              //var properties = controller.categoryProperties;
+
+              child: controller.isloading
+                  ? const Center(child: CircularProgressIndicator())
+                  : PropertiesListWidget(properties: properties),
             ),
             Offstage(
               offstage: this.layout != 'grid',
-              child: GetBuilder<PropertyController>(
-                builder: (controller) {
-                  //we are passing the value of the category id to the controller
-                  //to be use on getPropertiesByCategoryId(id) method
 
-                  controller.updateCategoryId(widget.category!.categoryId!);
+              //we are passing the value of the category id to the controller
+              //to be use on getPropertiesByCategoryId(id) method
 
-                  //controller.catId.value = widget.category!.categoryId!;
+              //controller.updateCategoryId(widget.category!.categoryId!);
 
-                  var properties = controller.categoryProperties;
+              //controller.catId.value = widget.category!.categoryId!;
 
-                  if (controller.isloading) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else {
-                    return PropertiesGridWidget(properties: properties);
-                  }
-                },
-              ),
+              //var properties = controller.categoryProperties;
+
+              child: controller.isloading
+                  ? const Center(child: CircularProgressIndicator())
+                  : PropertiesGridWidget(properties: properties),
             ),
           ],
         ),

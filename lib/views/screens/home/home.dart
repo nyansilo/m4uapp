@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:circle_flags/circle_flags.dart';
 import 'package:get/get.dart';
+import 'package:m4uapp/views/screens/home/home_category_list.dart';
+import 'package:m4uapp/views/screens/home/home_recent_properties.dart';
 import 'dart:math' as math;
 
 import '../../../app.dart';
@@ -15,6 +17,7 @@ import '../../widgets/widget.dart';
 
 import 'home_category_item.dart';
 import 'home_popular_header.dart';
+import 'home_popular_properties.dart';
 import 'home_recent_header.dart';
 import 'home_swiper.dart';
 import 'search_field.dart';
@@ -33,12 +36,16 @@ class _HomeState extends State<Home> {
   void _onActionlanguage(BuildContext context) async {
     var _listLanguage = Language.languageList();
 
-    final result = await showModalBottomSheet<String?>(
+    final result = await showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       builder: (BuildContext context) {
-        Widget bookingItem = Container();
-
         return SafeArea(
           child: Container(
             constraints: BoxConstraints(
@@ -64,15 +71,17 @@ class _HomeState extends State<Home> {
                       child: ListView.builder(
                         itemBuilder: (context, index) {
                           Widget? trailing;
+                          final selected = langController.languageName;
                           final item = _listLanguage[index];
-                          /*if (item == _languageSelected) {
-                              trailing = Icon(
-                                Icons.check,
-                                color: Theme.of(context).primaryColor,
-                              );
-                            }
-                            */
+                          if (item.name == selected) {
+                            trailing = Icon(
+                              Icons.check,
+                              color: Theme.of(context).primaryColor,
+                            );
+                          }
+
                           return AppListTitle(
+                            isButton: false,
                             title: item.name,
                             trailing: trailing,
                             onPressed: () async {
@@ -108,8 +117,8 @@ class _HomeState extends State<Home> {
     return SliverPersistentHeader(
       pinned: true,
       delegate: _SliverAppBarDelegate(
-        minHeight: 50.0,
-        maxHeight: 50.0,
+        minHeight: 55.0,
+        maxHeight: 55.0,
         child: Container(
           color: Colors.transparent,
           child: header,
@@ -121,12 +130,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: AppBar(
-            centerTitle: true,
-            elevation: 0,
-            /*actions: <Widget>[
+          centerTitle: true,
+          elevation: 0,
+          /*actions: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: DropdownButton<Language>(
@@ -161,28 +171,31 @@ class _HomeState extends State<Home> {
                 ),
               ),
             ],*/
-            //leading: IconButton(icon: const Icon(Icons.list), onPressed: () {}),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ConstrainedBox(
-                  constraints:
-                      const BoxConstraints(maxHeight: 35, maxWidth: 200),
-                  child: Text(
-                    translation(context).home_title,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.0,
-                      fontFamily: 'Merriweather',
-                      fontWeight: FontWeight.bold,
-                    ),
+          //leading: IconButton(icon: const Icon(Icons.list), onPressed: () {}),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 35, maxWidth: 200),
+                child: Text(
+                  translation(context).home_title,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColor,
+                    fontSize: 16.0,
+                    //fontFamily: 'Merriweather',
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
       ),
       body: CustomScrollView(
+        physics: const BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
         slivers: <Widget>[
           PreferredSize(
             preferredSize: const Size.fromHeight(kToolbarHeight - 10.0),
@@ -193,9 +206,9 @@ class _HomeState extends State<Home> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    const Icon(
+                    Icon(
                       Icons.language_outlined,
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                       size: 15.0,
                     ),
                     const SizedBox(
@@ -204,28 +217,28 @@ class _HomeState extends State<Home> {
                     Obx(
                       () => Text(
                         langController.languageName,
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
                           fontSize: 14.0,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
-                    const Icon(
+                    Icon(
                       Icons.arrow_drop_down,
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                       size: 25.0,
                     ),
                     const Spacer(),
-                    const Icon(
+                    Icon(
                       Icons.notifications,
-                      color: Colors.white,
+                      color: Theme.of(context).primaryColor,
                       size: 25.0,
                     ),
                   ],
                 ),
               ),
-              backgroundColor: Theme.of(context).primaryColor,
+              //backgroundColor: Theme.of(context).primaryColor,
               floating: false,
               centerTitle: false,
             ),
@@ -233,240 +246,60 @@ class _HomeState extends State<Home> {
           makeHeader(
             Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).bottomAppBarColor,
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(15.0),
                   bottomRight: Radius.circular(15.0),
                 ),
               ),
               // All languages header
-              height: 50.0,
-              padding: const EdgeInsets.only(
-                  bottom: 15.0, left: 15.0, right: 15.0, top: 0.0),
+              height: 55.0,
+
               child: SearchField(),
             ),
           ),
           SliverList(
-            delegate: SliverChildListDelegate([
-              GetBuilder<PropertyController>(
-                builder: (featuredPropertiesData) {
-                  var featured = featuredPropertiesData.popularProperties;
-                  return HomeSwipe(height: 300.0, item: featured);
-                },
-              ),
-              _buildCategory(context),
-              GetBuilder<PropertyController>(
-                builder: (popularPropertiesData) {
-                  var popular = popularPropertiesData.popularProperties;
-                  return _buildPopular(context, popular);
-                },
-              ),
-              GetBuilder<PropertyController>(
-                builder: (recentPropertiesData) {
-                  var recent = recentPropertiesData.recentProperties;
-                  return _buildRecent(context, recent);
-                },
-              ),
-            ]),
+            delegate: SliverChildListDelegate(
+              [
+                SafeArea(
+                  top: false,
+                  bottom: false,
+                  child: Column(
+                    children: [
+                      GetBuilder<PropertyController>(
+                        builder: (featuredPropertiesData) {
+                          var featured =
+                              featuredPropertiesData.popularProperties;
+
+                          return HomeSwipe(height: 300.0, item: featured);
+                        },
+                      ),
+                      //Build Categories
+                      const HomeCategoryList(),
+                      //Build popular properties
+                      GetBuilder<PropertyController>(
+                        builder: (popularPropertiesData) {
+                          var popular = popularPropertiesData.popularProperties;
+                          return HomePopularProperties(popular: popular);
+                        },
+                      ),
+                      //Build recent properties
+                      GetBuilder<PropertyController>(
+                        builder: (recentPropertiesData) {
+                          var recent = recentPropertiesData.recentProperties;
+                          return HomeRecentProperties(recent: recent);
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
     );
   }
-
-  ///Build Category UI
-  ///
-  Widget _buildCategory(BuildContext context) {
-    List<CategoryDisplayModel> categories = categoriesDisplayList;
-
-    ///Loading
-    Widget content = Wrap(
-      runSpacing: 8,
-      alignment: WrapAlignment.center,
-      children: List.generate(4, (index) => index).map(
-        (item) {
-          return const HomeCategoryItem();
-        },
-      ).toList(),
-    );
-
-    content = Wrap(
-      runSpacing: 8,
-      alignment: WrapAlignment.center,
-      children: categories.map(
-        (item) {
-          return HomeCategoryItem(
-            item: item,
-            onPressed: (item) {
-              _onTapCategoryItem(item, context);
-            },
-          );
-        },
-      ).toList(),
-    );
-
-    return Container(
-      padding: const EdgeInsets.all(15),
-      child: content,
-    );
-  }
-
-  ///Build list popular
-  Widget _buildPopular(BuildContext context, List<PropertyModel> popular) {
-    ///Loading
-    final size = MediaQuery.of(context).size;
-    final left = MediaQuery.of(context).padding.left;
-    final right = MediaQuery.of(context).padding.right;
-    const itemHeight = 220;
-    final itemWidth = (size.width - 48 - left - right) / 2.8;
-    //final itemWidth = MediaQuery.of(context).size.width * 1 / 2.1;
-    final ratio = itemWidth / itemHeight;
-
-    Widget content = GridView.count(
-      //padding: const EdgeInsets.only(left: 16, right: 16, top: 8),
-      mainAxisSpacing: 16,
-      crossAxisSpacing: 16,
-      crossAxisCount: 2,
-      childAspectRatio: ratio,
-      children: List.generate(8, (index) => index).map((item) {
-        return Container(
-          width: MediaQuery.of(context).size.width * 1 / 2.1,
-          //padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: const AppProductItem(
-            type: ProductViewType.grid,
-          ),
-        );
-      }).toList(),
-    );
-
-    if (popular.isNotEmpty) {
-      ///On navigate property detail
-      void _onPropertyDetail(PropertyModel item) {
-        Navigator.pushNamed(context, Routes.propertyDetailRoute,
-            arguments: item);
-      }
-
-      content = ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        itemBuilder: (context, index) {
-          final item = popular[index];
-          return Container(
-            width: MediaQuery.of(context).size.width * 1 / 2.1,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: AppProductItem(
-              onPressed: () {
-                _onPropertyDetail(item);
-              },
-              item: item,
-              type: ProductViewType.grid,
-            ),
-          );
-        },
-        itemCount: popular.length,
-      );
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 8),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const PopularHeader(),
-              const SizedBox(height: 2),
-              Text(
-                translation(context).let_find_interesting,
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            ],
-          ),
-        ),
-        Container(
-          height: 220,
-          padding: const EdgeInsets.only(top: 4),
-          child: content,
-        ),
-      ],
-    );
-  }
-
-  ///Build list recent
-  Widget _buildRecent(BuildContext context, List<PropertyModel> recent) {
-    ///Loading
-    Widget content = ListView.builder(
-      padding: const EdgeInsets.all(0),
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) {
-        return const Padding(
-          padding: EdgeInsets.only(bottom: 16),
-          child: AppProductItem(type: ProductViewType.small),
-        );
-      },
-      itemCount: 8,
-    );
-
-    if (recent.isNotEmpty) {
-      void _onPropertyDetail(PropertyModel item) {
-        Navigator.pushNamed(context, Routes.propertyDetailRoute,
-            arguments: item);
-      }
-
-      content = ListView.builder(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(0),
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, index) {
-          final item = recent[index];
-          return Padding(
-            padding: const EdgeInsets.only(bottom: 16),
-            child: AppProductItem(
-              onPressed: () {
-                _onPropertyDetail(item);
-              },
-              item: item,
-              type: ProductViewType.small,
-            ),
-          );
-        },
-        itemCount: recent.length,
-      );
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const RecentHeader(),
-              Padding(
-                padding: const EdgeInsets.only(top: 2),
-                child: Text(
-                  translation(context).what_happen,
-                  style: Theme.of(context).textTheme.bodyText1,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: content,
-        ),
-      ],
-    );
-  }
-}
-
-void _onTapCategoryItem(CategoryDisplayModel item, BuildContext context) {
-  Navigator.pushNamed(context, Routes.propertyListRoute, arguments: item);
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {

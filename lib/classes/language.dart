@@ -12,8 +12,8 @@ class Language {
       Language(1, "🇺🇸", "English", "en", "us"),
       Language(2, "🇹🇿", "Swahili", "sw", "tz"),
       Language(3, "🇨🇳", "Chinese", "zh", "cn"),
-      Language(4, "🇸🇦", "اَلْعَرَبِيَّةُ", "ar", "sa"),
-      Language(5, "🇮🇳", "हिंदी", "hi", "in")
+      Language(4, "🇸🇦", "Arabic", "ar", "sa"),
+      Language(5, "🇮🇳", "Hindi", "hi", "in")
     ];
   }
 }

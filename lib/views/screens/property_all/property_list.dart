@@ -86,7 +86,7 @@ class _PropertyListState extends State<PropertyList> {
                 ),
               ),
             ),
-            Offstage(
+            /*Offstage(
               offstage: this.layout != 'list',
               child: GetBuilder<PropertyController>(
                 builder: (controller) {
@@ -104,6 +104,7 @@ class _PropertyListState extends State<PropertyList> {
                 },
               ),
             ),
+            */
             Offstage(
               offstage: this.layout != 'grid',
               child: GetBuilder<PropertyController>(

@@ -7,6 +7,7 @@ class AppListTitle extends StatelessWidget {
   final Widget? trailing;
   final VoidCallback? onPressed;
   final bool border;
+  final bool isButton;
 
   const AppListTitle({
     Key? key,
@@ -15,8 +16,31 @@ class AppListTitle extends StatelessWidget {
     this.leading,
     this.trailing,
     this.onPressed,
+    this.isButton = false,
     this.border = true,
   }) : super(key: key);
+
+  showwidget(BuildContext context) {
+    if (isButton != true) {
+      return Text(
+        title,
+        style: Theme.of(context)
+            .textTheme
+            .subtitle1!
+            .copyWith(fontWeight: FontWeight.bold),
+      );
+    } else {
+      return Center(
+        child: Text(
+          title,
+          style: Theme.of(context)
+              .textTheme
+              .subtitle1!
+              .copyWith(fontWeight: FontWeight.bold),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +93,7 @@ class AppListTitle extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 16, bottom: 16),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .subtitle1!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                            subTitle
-                          ],
+                          children: [showwidget(context), subTitle],
                         ),
                       ),
                     ),

@@ -6,6 +6,7 @@
     "blog_nav_item": "博客",
     "account_nav_item": "帐户",
     "favorite_nav_item": "喜爱",
+    
   
   
     "located_where": "WHERE ARE YOU LOCATED?>",
@@ -46,7 +47,39 @@
     "confirm_password_error": "Password don't match",
     "invalid_credentials": "Invalid credentials",
     "form_error": "Data is invalid, please fill the form before submitting!",
-    "error_occured": "An Error Occurred!"
+    "error_occured": "An Error Occurred!",
+
+    "blog":"博客",
+
+    "account": "帐户",
+    "sign_out": "登出",
+    "my_property": "我的财产",
+    "check_out_your_properties": "查看您的房产",
+    "my_booking": "我的预订",
+    "check_out_your_bookings": "查看您的预订",
+    "wish_list": "喜爱",
+    "your_most_loved_items":"您最喜爱的物品",
+    "help_center":"帮助中心",
+    "help_regarding_your_recent_urchase": "有关您最近购买的帮助",
+    "edit_profile":"编辑个人资料",
+    "change_password":"更改密码",
+    "about_us":"关于我们",
+    "contact_us":"联系我们",
+    "faq":"Faq",
+    "term_of_use":"使用条款",
+    "privacy_policy":"隐私政策",
+    "app_version":"App Version",
+
+    "setting":"环境",
+    "language":"语",
+    "notification":"通知",
+    "theme":"主题",
+    "dark_mode":"黑暗模式",
+    "light_mode":"灯光模式",
+    "font":"字体",
+
+    "change_language":"改变语言",
+    "search":"搜索"
 
    
 }

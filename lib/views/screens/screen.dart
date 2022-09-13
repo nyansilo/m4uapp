@@ -1,9 +1,15 @@
 export 'home/home.dart';
 export 'wishlist/wishlist.dart';
 export 'blog/blog.dart';
+export 'blog_detail/blog_detail.dart';
 export 'account/account.dart';
 export 'category/category.dart';
 export 'property_list/property_list.dart';
 export 'property_detail/property_detail.dart';
 export 'property_gallery/property_gallery.dart';
 export 'properties/properties.dart';
+export 'picker/picker.dart';
+export 'add_property/add_property.dart';
+export 'gallery_upload/gallery_upload.dart';
+export 'setting/setting.dart';
+export 'change_language/change_language.dart';
